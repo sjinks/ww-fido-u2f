@@ -35,6 +35,14 @@ function magic() {
 		}
 	}
 
+	function haveNewItems()
+	{
+		var noitems = list.querySelector('tr.no-items')
+		if (noitems) {
+			noitems.parentNode.removeChild(noitems);
+		}
+	}
+
 	function registerCompleted()
 	{
 		showSpinner(false);
@@ -44,11 +52,7 @@ function magic() {
 		}
 
 		if (this.response.ok) {
-			var noitems = list.querySelector('tr.no-items')
-			if (noitems) {
-				noitems.parentNode.removeChild(noitems);
-			}
-
+			haveNewItems();
 			list.insertAdjacentHTML('beforeend', this.response.row);
 			showSuccess(this.response.message, 'new-key');
 
@@ -99,6 +103,41 @@ function magic() {
 		}
 	});
 
+	function killRow(target)
+	{
+		while (target !== null && target.tagName.toUpperCase() !== 'TR') {
+			target = target.parentNode;
+		}
+
+		target && target.parentNode.removeChild(target);
+	}
+
+	function maybeNoItems()
+	{
+		if (!list.getElementsByTagName('tr').length) {
+			var tpl = document.getElementById('tpl-empty').textContent;
+			list.insertAdjacentHTML('beforeend', tpl);
+		}
+	}
+	
+	function revokeCompleted()
+	{
+		if (null === this.response || this.status !== 200) {
+			showError(wwU2F.serverError, 'registered-keys');
+			return;
+		}
+
+		if (this.response.ok) {
+			showSuccess(this.response.message, 'registered-keys');
+			killRow(this.tgt);
+			maybeNoItems();
+			wwU2F.sigs = this.response.sigs;
+		}
+		else {
+			showError(this.response.message, 'registered-keys');
+		}
+	}
+	
 	document.querySelector('table.widefat > tbody').addEventListener('click', function(e) {
 		var target = e.target;
 		while (target !== null && target.tagName.toUpperCase() !== 'BUTTON' && target.className.indexOf('revoke-button') !== -1) {
@@ -109,31 +148,8 @@ function magic() {
 			var handle = target.dataset.handle;
 			var nonce  = target.dataset.nonce;
 			var req    = new XMLHttpRequest();
-			req.addEventListener('load', function() {
-				if (null === this.response || this.status !== 200) {
-					showError(wwU2F.serverError, 'registered-keys');
-					return;
-				}
-
-				if (this.response.ok) {
-					showSuccess(this.response.message, 'registered-keys');
-					while (target !== null && target.tagName.toUpperCase() !== 'TR') {
-						target = target.parentNode;
-					}
-
-					target && target.parentNode.removeChild(target);
-
-					if (!list.getElementsByTagName('tr').length) {
-						var tpl = document.getElementById('tpl-empty').textContent;
-						list.insertAdjacentHTML('beforeend', tpl);
-					}
-
-					wwU2F.sigs = this.response.sigs;
-				}
-				else {
-					showError(this.response.message, 'registered-keys');
-				}
-			});
+			req.tgt    = target;
+			req.addEventListener('load', revokeCompleted);
 
 			req.open('POST', wwU2F.ajax_url);
 			req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
