@@ -1,0 +1,115 @@
+#: ../views/create.php:3 ../inc/Admin.php:27
+msgid "FIDO U2F"
+msgstr ""
+
+#: ../views/create.php:5
+msgid "Registered Keys"
+msgstr ""
+
+#: ../views/create.php:12
+msgid "Register a New Key"
+msgstr ""
+
+#: ../views/create.php:15
+msgid ""
+"Please insert your security key. If the key has a blinking light, press the "
+"button or gold disk."
+msgstr ""
+
+#: ../views/create.php:20 ../inc/KeyTable.php:26
+msgid "Key Name"
+msgstr ""
+
+#: ../views/create.php:23
+msgid "Register"
+msgstr ""
+
+#: ../views/login.php:22
+msgid "Please enable JavaScript."
+msgstr ""
+
+#: ../views/login.php:27
+msgid ""
+"Press the button on your security key to finish signing in. If it does not "
+"have a button, just re-insert it."
+msgstr ""
+
+#: ../inc/KeyTable.php:27
+msgid "Counter Value"
+msgstr ""
+
+#: ../inc/KeyTable.php:28
+msgid "Public Key"
+msgstr ""
+
+#: ../inc/KeyTable.php:29
+msgid "Created"
+msgstr ""
+
+#: ../inc/KeyTable.php:30
+msgid "Last Used"
+msgstr ""
+
+#: ../inc/KeyTable.php:41
+msgid "Revoke"
+msgstr ""
+
+#: ../inc/KeyTable.php:74
+msgid "Never"
+msgstr ""
+
+#: ../inc/AJAX.php:39 ../inc/AJAX.php:87
+msgid "Required parameter missing"
+msgstr ""
+
+#: ../inc/AJAX.php:65
+msgid "Your key has been successfully registered."
+msgstr ""
+
+#: ../inc/AJAX.php:96
+msgid "You have logged in successfully."
+msgstr ""
+
+#: ../inc/AJAX.php:118
+msgid "CSRF token does not match. Please reload the page."
+msgstr ""
+
+#: ../inc/AJAX.php:122
+msgid "The key has been revoked."
+msgstr ""
+
+#: ../inc/Admin.php:47 ../inc/Login.php:49
+msgid "There was an error communicating with the server."
+msgstr ""
+
+#: ../inc/Admin.php:49 ../inc/Login.php:51
+msgid "Success."
+msgstr ""
+
+#: ../inc/Admin.php:50 ../inc/Login.php:52
+msgid "Unknown error."
+msgstr ""
+
+#: ../inc/Admin.php:51 ../inc/Login.php:53
+msgid "The request cannot be processed."
+msgstr ""
+
+#: ../inc/Admin.php:52 ../inc/Login.php:54
+msgid "Client configuration is not supported."
+msgstr ""
+
+#: ../inc/Admin.php:53 ../inc/Login.php:55
+msgid "The presented device is not eligible."
+msgstr ""
+
+#: ../inc/Admin.php:54 ../inc/Login.php:56
+msgid "Timeout reached before request could be satisfied."
+msgstr ""
+
+#: ../inc/Admin.php:58 ../inc/Login.php:60
+msgid "Your browser does not support FIDO U2F. Please try another one."
+msgstr ""
+
+#: ../inc/Admin.php:61
+msgid "Are you sure you want to revoke this key?"
+msgstr ""

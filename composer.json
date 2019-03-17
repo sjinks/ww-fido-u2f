@@ -1,0 +1,31 @@
+{
+	"name" : "wildwolf/ww-fido-u2f",
+	"type" : "wordpress-plugin",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "Volodymyr Kolesnykov",
+			"email" : "volodymyr@wildwolf.name",
+			"homepage" : "https://wildwolf.name/",
+			"role" : "Developer"
+		}
+	],
+	"description" : "WordPress Plugin to Enable FIDO U2F Authentication",
+	"require" : {
+		"yubico/u2flib-server" : "~1.0",
+		"composer/installers" : "~1",
+		"wildwolf/wp-class-autoloader" : "~1"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"WildWolf\\U2F\\" : "inc"
+		}
+	},
+	"keywords" : [
+		"FIDO",
+		"U2F",
+		"plugin",
+		"security",
+		"authentication",
+		"2FA"
+	]
+}

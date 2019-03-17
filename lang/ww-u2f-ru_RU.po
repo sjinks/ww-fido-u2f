@@ -1,0 +1,124 @@
+msgid ""
+msgstr ""
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../views/create.php:3 ../inc/Admin.php:27
+msgid "FIDO U2F"
+msgstr "FIDO U2F"
+
+#: ../views/create.php:5
+msgid "Registered Keys"
+msgstr "Зарегистрированные ключи"
+
+#: ../views/create.php:12
+msgid "Register a New Key"
+msgstr "Добавить новый ключ"
+
+#: ../views/create.php:15
+msgid ""
+"Please insert your security key. If the key has a blinking light, press the "
+"button or gold disk."
+msgstr ""
+
+#: ../views/create.php:20 ../inc/KeyTable.php:26
+msgid "Key Name"
+msgstr "Имя ключа"
+
+#: ../views/create.php:23
+msgid "Register"
+msgstr "Добавить"
+
+#: ../views/login.php:22
+msgid "Please enable JavaScript."
+msgstr ""
+
+#: ../views/login.php:27
+msgid ""
+"Press the button on your security key to finish signing in. If it does not "
+"have a button, just re-insert it."
+msgstr ""
+
+#: ../inc/KeyTable.php:27
+msgid "Counter Value"
+msgstr "Значение счётчика"
+
+#: ../inc/KeyTable.php:28
+msgid "Public Key"
+msgstr "Открытый ключ"
+
+#: ../inc/KeyTable.php:29
+msgid "Created"
+msgstr "Создан"
+
+#: ../inc/KeyTable.php:30
+msgid "Last Used"
+msgstr "Последнее использование"
+
+#: ../inc/KeyTable.php:41
+msgid "Revoke"
+msgstr "Отозвать"
+
+#: ../inc/KeyTable.php:74
+msgid "Never"
+msgstr "Никогда"
+
+#: ../inc/AJAX.php:39 ../inc/AJAX.php:87
+msgid "Required parameter missing"
+msgstr ""
+
+#: ../inc/AJAX.php:65
+msgid "Your key has been successfully registered."
+msgstr "Ваш ключ успешно зарегистрирован."
+
+#: ../inc/AJAX.php:96
+msgid "You have logged in successfully."
+msgstr "Вы успешно вошли в систему."
+
+#: ../inc/AJAX.php:118
+msgid "CSRF token does not match. Please reload the page."
+msgstr ""
+
+#: ../inc/AJAX.php:122
+msgid "The key has been revoked."
+msgstr "Ключ отозван."
+
+#: ../inc/Admin.php:47 ../inc/Login.php:49
+msgid "There was an error communicating with the server."
+msgstr "Произошла ошибка связи с сервером."
+
+#: ../inc/Admin.php:49 ../inc/Login.php:51
+msgid "Success."
+msgstr ""
+
+#: ../inc/Admin.php:50 ../inc/Login.php:52
+msgid "Unknown error."
+msgstr "Неизвестная ошибка."
+
+#: ../inc/Admin.php:51 ../inc/Login.php:53
+msgid "The request cannot be processed."
+msgstr ""
+
+#: ../inc/Admin.php:52 ../inc/Login.php:54
+msgid "Client configuration is not supported."
+msgstr ""
+
+#: ../inc/Admin.php:53 ../inc/Login.php:55
+msgid "The presented device is not eligible."
+msgstr ""
+
+#: ../inc/Admin.php:54 ../inc/Login.php:56
+msgid "Timeout reached before request could be satisfied."
+msgstr ""
+
+#: ../inc/Admin.php:58 ../inc/Login.php:60
+msgid "Your browser does not support FIDO U2F. Please try another one."
+msgstr "Ваш браузер не поддерживает FIDO U2F. Пожалуйста, попробуйте другой браузер."
+
+#: ../inc/Admin.php:61
+msgid "Are you sure you want to revoke this key?"
+msgstr "Вы уверены, что хотите отозвать этот ключ?"

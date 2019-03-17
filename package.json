@@ -1,0 +1,31 @@
+{
+  "name": "ww-fido-u2f",
+  "version": "1.0.0",
+  "description": "FIDO U2F Plugin",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjinks/ww-fido-u2f.git"
+  },
+  "author": "Volodymyr Kolesnykov <volodymyr@wildwolf.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sjinks/ww-fido-u2f/issues"
+  },
+  "homepage": "https://github.com/sjinks/ww-fido-u2f#readme",
+  "private": true,
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "del": "^4.0.0",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2"
+  }
+}
