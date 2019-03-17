@@ -6,7 +6,8 @@ build:
                     - composer require --dev johnpbloch/wordpress
 filter:
     excluded_paths:
-        - 'tests/*'
+        - 'assets/u2f-api.min.js'
+        - 'assets/u2f-api.js'
     dependency_paths:
         - wordpress/
 

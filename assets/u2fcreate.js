@@ -76,7 +76,7 @@ function magic() {
 		u2f.register(wwU2F.request.appId, request, wwU2F.sigs, function(data) {
 			if (data.errorCode) {
 				var code = wwU2F.errors[data.errorCode] || 1;
-				showError(wwU2F.errors[data.errorCode], 'new-key');
+				showError(wwU2F.errors[code], 'new-key');
 				showSpinner(false);
 				return;
 			}

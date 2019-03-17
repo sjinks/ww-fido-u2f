@@ -2,7 +2,6 @@
 
 const gulp         = require('gulp');
 const del          = require('del');
-const autoprefixer = require('gulp-autoprefixer');
 const rename       = require('gulp-rename');
 const postcss      = require('gulp-postcss');
 const sourcemaps   = require('gulp-sourcemaps');

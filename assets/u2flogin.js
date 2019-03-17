@@ -8,7 +8,7 @@ function magic() {
 	function showError(msg)
 	{
 		while (lerr.firstChild) {
-			lerr.removeChild(container.firstChild);
+			lerr.removeChild(lerr.firstChild);
 		}
 
 		lerr.insertAdjacentHTML('afterbegin', msg);
@@ -47,7 +47,7 @@ function magic() {
 		u2f.sign(wwU2F.request[0].appId, wwU2F.request[0].challenge, wwU2F.request, function(data) {
 			if (data.errorCode) {
 				var code = wwU2F.errors[data.errorCode] || 1;
-				showError(wwU2F.errors[data.errorCode]);
+				showError(wwU2F.errors[code]);
 				submit.removeAttribute('hidden');
 				pbar.setAttribute('hidden', '');
 			}
