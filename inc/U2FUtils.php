@@ -77,7 +77,7 @@ abstract class U2FUtils
 		}
 
 		$meta['keys'] = \array_values($meta['keys']);
-		return \update_user_meta($user_id, self::USERMETA_OPTIONS_KEY, $meta);
+		return \update_user_meta($user_id, self::USERMETA_OPTIONS_KEY, $meta) !== false;
 	}
 
 	private static function updateKey(int $user_id, array $meta, Registration $reg)

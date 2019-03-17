@@ -118,7 +118,7 @@ final class AJAX
 			\wp_die(\json_encode(['ok' => false, 'message' => \__('CSRF token does not match. Please reload the page.', 'ww-u2f')]));
 		}
 
-		U2FUtils::deleteKey($user_id, $handle);
+		U2FUtils::deleteKey($user_id, /** @scrutinizer ignore-type */ $handle);
 		\wp_die(\json_encode(['ok' => true, 'message' => \__('The key has been revoked.', 'ww-u2f'), 'sigs' => U2FUtils::getAuthDataFor($user_id)]));
 	}
 }

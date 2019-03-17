@@ -67,7 +67,7 @@ final class Admin
 
 	private static function setRegisterRequest(int $user_id, array $req)
 	{
-		$manager = \WP_Session_Tokens::get_instance(\get_current_user_id());
+		$manager = \WP_Session_Tokens::get_instance($user_id);
 		$token   = \wp_get_session_token();
 		$session = $manager->get($token);
 
