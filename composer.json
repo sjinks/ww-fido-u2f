@@ -13,7 +13,12 @@
 	"require" : {
 		"yubico/u2flib-server" : "~1.0",
 		"composer/installers" : "~1",
-		"wildwolf/wp-class-autoloader" : "~1"
+		"wildwolf/wp-class-autoloader" : "~1",
+		"php" : "> 7.0.0"
+	},
+	"suggest" : {
+		"wildwolf/wp-login-logger" : "WordPress plugin to log login attempts",
+		"wildwolf/ww-hide-wplogin" : "WordPress plugin to hide wp-login.php and use a custom URL for logging in"
 	},
 	"autoload" : {
 		"psr-4" : {
@@ -26,6 +31,7 @@
 		"plugin",
 		"security",
 		"authentication",
-		"2FA"
+		"2FA",
+		"wordpress"
 	]
 }
