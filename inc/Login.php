@@ -3,6 +3,8 @@ namespace WildWolf\U2F;
 
 final class Login
 {
+	private $last_token;
+
 	public static function instance()
 	{
 		static $self = null;
@@ -21,16 +23,39 @@ final class Login
 
 	public function login_init()
 	{
-		\add_action('wp_login', [$this, 'wp_login'], 50, 2);
+		\add_action('wp_login',        [$this, 'wp_login'], 50, 2);
+		\add_action('set_auth_cookie', [$this, 'set_auth_cookie'], 10, 6);
+	}
+
+	/**
+	 * Fires immediately before the authentication cookie is set.
+	 *
+	 * @param string $auth_cookie Authentication cookie value.
+	 * @param int    $expire      The time the login grace period expires as a UNIX timestamp.
+	 *                            Default is 12 hours past the cookie's expiration time.
+	 * @param int    $expiration  The time when the authentication cookie expires as a UNIX timestamp.
+	 *                            Default is 14 days from now.
+	 * @param int    $user_id     User ID.
+	 * @param string $scheme      Authentication scheme. Values include 'auth' or 'secure_auth'.
+	 * @param string $token       User's session token to use for this cookie.
+	 */
+	public function set_auth_cookie(/** @scrutinizer ignore-unused */ $auth_cookie, /** @scrutinizer ignore-unused */ $expire, /** @scrutinizer ignore-unused */ $expiration, /** @scrutinizer ignore-unused */ $user_id, /** @scrutinizer ignore-unused */ $scheme, $token)
+	{
+		$this->last_token = $token;
 	}
 
 	public function wp_login($user_login, \WP_User $user)
 	{
 		if (!U2FUtils::enabledFor($user) || !\is_ssl()) {
+			unset($this->last_token);
 			return;
 		}
 
-		\wp_destroy_current_session();
+		if ($this->last_token) {
+			$manager = \WP_Session_Tokens::get_instance($user->ID);
+			$manager->destroy($this->last_token);
+		}
+
 		\wp_clear_auth_cookie();
 
 		$scripts = \wp_scripts();
