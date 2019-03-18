@@ -23,15 +23,10 @@ final class Plugin
 
 	public function init()
 	{
-		\add_action('login_init', [$this, 'login_init']);
+		\add_action('login_init', [Login::class, 'instance']);
 
 		if (\is_admin()) {
 			Admin::instance();
 		}
-	}
-
-	public function login_init()
-	{
-		Login::instance();
 	}
 }

@@ -1,4 +1,4 @@
-/** global u2f, wwU2F */
+/** global u2f, wwU2F, ajaxurl */
 function magic() {
 	var form       = document.getElementById('new-key-form');
 	var spinner    = form.querySelector('.spinner');
@@ -88,7 +88,7 @@ function magic() {
 			var name = encodeURIComponent(key_name.value);
 			var req  = new XMLHttpRequest();
 			req.addEventListener('load', registerCompleted);
-			req.open('POST', wwU2F.ajax_url);
+			req.open('POST', ajaxurl);
 			req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			req.responseType = 'json';
 			req.send('action=wwu2f_register&data=' + encodeURIComponent(JSON.stringify(data)) + '&name=' + name);
@@ -140,7 +140,7 @@ function magic() {
 	
 	document.querySelector('table.widefat > tbody').addEventListener('click', function(e) {
 		var target = e.target;
-		while (target !== null && target.tagName.toUpperCase() !== 'BUTTON' && target.className.indexOf('revoke-button') !== -1) {
+		while (target !== null && (!target.tagName || target.tagName.toUpperCase() !== 'BUTTON' || target.className.indexOf('revoke-button') === -1)) {
 			target = target.parentNode;
 		}
 
@@ -151,7 +151,7 @@ function magic() {
 			req.tgt    = target;
 			req.addEventListener('load', revokeCompleted);
 
-			req.open('POST', wwU2F.ajax_url);
+			req.open('POST', ajaxurl);
 			req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			req.responseType = 'json';
 			req.send(

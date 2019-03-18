@@ -42,7 +42,7 @@ final class Admin
 			list($req, $sigs) = U2FUtils::getRegisterDataFor($user_id);
 
 			$suffix = \wp_scripts_get_suffix();
-			\wp_enqueue_script('u2fcreate', WPUtils::assetsUrl("u2fcreate{$suffix}.js"), [], '2019031700', true);
+			\wp_enqueue_script('u2fcreate', WPUtils::assetsUrl("u2fcreate{$suffix}.js"), [], '2019031800', true);
 			\wp_localize_script('u2fcreate', 'wwU2F', [
 				'serverError' => \__('There was an error communicating with the server.', 'ww-u2f'),
 				'errors'      => [
@@ -53,7 +53,6 @@ final class Admin
 					4 => \__('The presented device is not eligible.', 'ww-u2f'),
 					5 => \__('Timeout reached before request could be satisfied.', 'ww-u2f'),
 				],
-				'ajax_url'   => \admin_url('admin-ajax.php'),
 				'u2f_api'    => WPUtils::assetsUrl("u2f-api{$suffix}.js?v=2019031600"),
 				'noSupport'  => \__('Your browser does not support FIDO U2F. Please try another one.', 'ww-u2f'),
 				'request'    => $req,
