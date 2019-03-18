@@ -8,6 +8,7 @@
  * License: MIT
  * Text Domain: ww-u2f
  * Domain Path: /lang
+ * Network:
  */
 
 defined('ABSPATH') || die();
