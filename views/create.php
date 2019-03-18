@@ -1,15 +1,15 @@
 <?php defined('ABSPATH') || die(); ?>
 <div class="wrap">
-	<h2><?=__('FIDO U2F', 'ww-u2f'); ?></h2>
+	<h1><?=__('FIDO U2F', 'ww-u2f'); ?></h1>
 
-	<h3 id="registered-keys"><?=__('Registered Keys', 'ww-u2f'); ?></h3>
+	<h2 id="registered-keys"><?=__('Registered Keys', 'ww-u2f'); ?></h2>
 <?php
 $table = new WildWolf\U2F\KeyTable(['screen' => 'u2f', 'user_id' => get_current_user_id()]);
 $table->prepare_items();
 $table->display();
 ?>
 
-	<h3 class="hide-if-no-js" id="new-key"><?=__('Register a New Key', 'ww-u2f'); ?></h3>
+	<h2 class="hide-if-no-js" id="new-key"><?=__('Register a New Key', 'ww-u2f'); ?></h2>
 	<form class="hide-if-no-js" id="new-key-form">
 		<p id="hint" hidden="hidden">
 			<?=__('Please insert your security key. If the key has a blinking light, press the button or gold disk.', 'ww-u2f'); ?>

@@ -1,9 +1,11 @@
 /** global u2f, wwU2F */
-function magic() {
-	var form   = document.getElementById('u2f-form');
+function magic()
+{
+	var $      = document.getElementById.bind(document);
+	var form   = $('u2f-form');
 	var submit = form.querySelector('p.submit');
-	var pbar   = document.getElementById('progressbar');
-	var lerr   = document.getElementById('login_error');
+	var pbar   = $('progressbar');
+	var lerr   = $('login_error');
 
 	function showError(msg)
 	{
@@ -23,14 +25,14 @@ function magic() {
 			pbar.setAttribute('hidden', '');
 			return;
 		}
-		
+
 		if (this.response.ok) {
 			if (this.response.redirect) {
 				window.location.href = this.response.redirect;
 			}
 			else if (this.response.message) {
-				document.getElementById('progressbar-container').style.display = 'none';
-				document.getElementById('interact').innerHTML = this.response.message;
+				$('progressbar-container').style.display = 'none';
+				$('interact').innerHTML = this.response.message;
 			}
 		}
 		else {
@@ -52,10 +54,10 @@ function magic() {
 				pbar.setAttribute('hidden', '');
 			}
 			else {
-				var remember      = encodeURIComponent(document.getElementById('rememberme').value);
-				var redirect      = encodeURIComponent(document.getElementById('redirect_to').value);
-				var user_id       = encodeURIComponent(document.getElementById('user_id').value);
-				var interim_login = encodeURIComponent(document.getElementById('interim_login').value);
+				var remember      = encodeURIComponent($('rememberme').value);
+				var redirect      = encodeURIComponent($('redirect_to').value);
+				var user_id       = encodeURIComponent($('user_id').value);
+				var interim_login = encodeURIComponent($('interim_login').value);
 				var req = new XMLHttpRequest();
 				req.addEventListener('load', requestCompleted);
 				req.open('POST', wwU2F.ajax_url);
@@ -88,7 +90,7 @@ function magic() {
 		doSign();
 	});
 
-	document.getElementById('interact').removeAttribute('hidden');
+	$('interact').removeAttribute('hidden');
 	doSign();
 }
 

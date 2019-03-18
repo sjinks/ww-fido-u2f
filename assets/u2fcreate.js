@@ -1,24 +1,34 @@
 /** global u2f, wwU2F, ajaxurl */
-function magic() {
-	var form       = document.getElementById('new-key-form');
+function magic()
+{
+	var $          = document.getElementById.bind(document);
+	var form       = $('new-key-form');
 	var spinner    = form.querySelector('.spinner');
-	var list       = document.getElementById('the-list');
-	var btn_submit = document.getElementById('submit-button');
-	var key_name   = document.getElementById('key-name');
-	var hint       = document.getElementById('hint');
+	var list       = $('the-list');
+	var btn_submit = $('submit-button');
+	var key_name   = $('key-name');
+	var hint       = $('hint');
 
 	function showError(msg, where)
 	{
 		var node = document.querySelector('#' + where + ' + .notice');
 		node && node.parentNode.removeChild(node);
-		document.getElementById(where).insertAdjacentHTML('afterend', '<div class="notice notice-error inline"><p>' + msg + '</p></div>');
+		$(where).insertAdjacentHTML('afterend', '<div class="notice notice-error inline"><p>' + msg + '</p></div>');
 	}
 
 	function showSuccess(msg, where)
 	{
 		var node = document.querySelector('#' + where + ' + .notice');
 		node && node.parentNode.removeChild(node);
-		document.getElementById(where).insertAdjacentHTML('afterend', '<div class="notice notice-success inline"><p>' + msg + '</p></div>');
+		$(where).insertAdjacentHTML('afterend', '<div class="notice notice-success inline"><p>' + msg + '</p></div>');
+	}
+
+	function hideMessages()
+	{
+		var node = document.querySelector('#new-key + .notice');
+		node && node.parentNode.removeChild(node);
+		node = document.querySelector('#registered-keys + .notice');
+		node && node.parentNode.removeChild(node);
 	}
 
 	function showSpinner(show)
@@ -67,10 +77,7 @@ function magic() {
 
 	function doRegister()
 	{
-		var node = document.querySelector('#new-key + .notice');
-		node && node.parentNode.removeChild(node);
-		node = document.querySelector('#registered-keys + .notice');
-		node && node.parentNode.removeChild(node);
+		hideMessages();
 
 		var request = [{
 			version: wwU2F.request.version,
@@ -115,13 +122,16 @@ function magic() {
 	function maybeNoItems()
 	{
 		if (!list.getElementsByTagName('tr').length) {
-			var tpl = document.getElementById('tpl-empty').textContent;
+			var tpl = $('tpl-empty').textContent;
 			list.insertAdjacentHTML('beforeend', tpl);
 		}
 	}
-	
+
 	function revokeCompleted()
 	{
+		var spinner = this.tgt.querySelector('.spinner');
+		spinner.classList.remove('is-active');
+
 		if (null === this.response || this.status !== 200) {
 			showError(wwU2F.serverError, 'registered-keys');
 			return;
@@ -137,7 +147,7 @@ function magic() {
 			showError(this.response.message, 'registered-keys');
 		}
 	}
-	
+
 	document.querySelector('table.widefat > tbody').addEventListener('click', function(e) {
 		var target = e.target;
 		while (target !== null && (!target.tagName || target.tagName.toUpperCase() !== 'BUTTON' || target.className.indexOf('revoke-button') === -1)) {
@@ -150,6 +160,12 @@ function magic() {
 			var req    = new XMLHttpRequest();
 			req.tgt    = target;
 			req.addEventListener('load', revokeCompleted);
+
+			var spinner = target.querySelector('.spinner');
+			spinner.style.float = 'none';
+			spinner.style.margin = 0;
+			spinner.classList.add('is-active');
+			hideMessages();
 
 			req.open('POST', ajaxurl);
 			req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

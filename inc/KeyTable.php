@@ -35,7 +35,7 @@ final class KeyTable extends \WP_List_Table
 	{
 		$actions = [
 			'revoke' => \sprintf(
-				'<button class="button-link hide-if-no-js revoke-button" data-handle="%1$s" data-nonce="%2$s">%3$s</button>',
+				'<button class="button-link hide-if-no-js revoke-button" data-handle="%1$s" data-nonce="%2$s">%3$s <span class="spinner"></span></button>',
 				$item->keyHandle,
 				\wp_create_nonce('revoke-key_' . $item->keyHandle),
 				\__('Revoke', 'ww-u2f')
@@ -70,10 +70,6 @@ final class KeyTable extends \WP_List_Table
 
 	private static function handleDateColumn($item, string $idx) : string
 	{
-		if (empty($item->$idx)) {
-			return \__('Never', 'ww-u2f');
-		}
-
 		$date_format = (string)\get_option('date_format', 'r');
 		$time_format = (string)\get_option('time_format', 'r');
 		return \date_i18n($date_format . ' ' . $time_format, $item->$idx);

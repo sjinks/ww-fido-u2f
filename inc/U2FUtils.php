@@ -100,7 +100,7 @@ abstract class U2FUtils
 		$key = (object)[
 			'name'      => $name,
 			'created'   => \time(),
-			'last_used' => 0,
+			'last_used' => \time(),
 			'keyHandle' => $reg->keyHandle,
 			'publicKey' => $reg->publicKey,
 			'counter'   => $reg->counter,
