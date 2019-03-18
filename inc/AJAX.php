@@ -101,7 +101,7 @@ final class AJAX
 		}
 		catch (\Throwable $e) {
 			$user = \get_userdata($user_id);
-			\do_action('wp_login_failed', $user ? $user->user_login : '');
+			\do_action('wp_login_failed', $user->user_login ?? '');
 			\wp_die(\json_encode(['ok' => false, 'message' => $e->getMessage()]));
 		}
 	}
