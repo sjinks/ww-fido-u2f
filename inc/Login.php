@@ -64,7 +64,7 @@ final class Login
 		$params = [
 			'rememberme'    => $_POST['rememberme']  ?? 0,
 			'redirect_to'   => $_POST['redirect_to'] ?? \home_url(),
-			'interim_login' => $_POST['interim_login'] ?? 0,
+			'interim_login' => $_POST['interim-login'] ?? 0,
 			'user_id'       => $user->ID,
 		];
 

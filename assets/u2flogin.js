@@ -31,7 +31,7 @@ function magic()
 				window.location.href = this.response.redirect;
 			}
 			else if (this.response.message) {
-				$('progressbar-container').style.display = 'none';
+				document.querySelector('.progressbar-container').style.display = 'none';
 				$('interact').innerHTML = this.response.message;
 			}
 		}
