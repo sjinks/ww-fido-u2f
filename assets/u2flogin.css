@@ -12,6 +12,8 @@ html.interim-login {
 
 #login {
 	padding: 0;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 form#u2f-form {

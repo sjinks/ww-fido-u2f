@@ -68,7 +68,7 @@ final class Login
 		$data = U2FUtils::getAuthDataFor($user->ID);
 
 		$suffix = \wp_scripts_get_suffix();
-		\wp_enqueue_style('u2flogin', WPUtils::assetsUrl("u2flogin{$suffix}.css"), ['login'], '2019031600');
+		\wp_enqueue_style('u2flogin', WPUtils::assetsUrl("u2flogin{$suffix}.css"), ['login'], '2019031900');
 		\wp_enqueue_script('u2flogin', WPUtils::assetsUrl("u2flogin{$suffix}.js"), [], '2019031700', true);
 		\wp_localize_script('u2flogin', 'wwU2F', [
 			'serverError' => \__('There was an error communicating with the server.', 'ww-u2f'),
@@ -81,7 +81,7 @@ final class Login
 				5 => \__('Timeout reached before request could be satisfied.', 'ww-u2f'),
 			],
 			'ajax_url'  => \admin_url('admin-ajax.php'),
-			'u2f_api'   => \plugins_url("assets/u2f-api{$suffix}.js?v=2019031600", \dirname(__DIR__) . '/plugin.php'),
+			'u2f_api'   => \plugins_url("assets/u2f-api{$suffix}.js?v=2019031900", \dirname(__DIR__) . '/plugin.php'),
 			'noSupport' => \__('Your browser does not support FIDO U2F. Please try another one.', 'ww-u2f'),
 			'request'   => $data,
 		]);
