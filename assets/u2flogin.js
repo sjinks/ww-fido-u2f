@@ -48,8 +48,8 @@ function magic()
 		lerr.setAttribute('hidden', '');
 		u2f.sign(wwU2F.request[0].appId, wwU2F.request[0].challenge, wwU2F.request, function(data) {
 			if (data.errorCode) {
-				var code = wwU2F.errors[data.errorCode] || 1;
-				showError(wwU2F.errors[code]);
+				var err = wwU2F.errors[data.errorCode] || wwU2F.errors[1];
+				showError(err);
 				submit.removeAttribute('hidden');
 				pbar.setAttribute('hidden', '');
 			}
