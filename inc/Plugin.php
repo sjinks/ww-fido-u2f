@@ -16,13 +16,12 @@ final class Plugin
 
 	private function __construct()
 	{
-		\load_plugin_textdomain('ww-u2f', /** @scrutinizer ignore-type */ false, \plugin_basename(\dirname(__DIR__)) . '/lang/');
-
 		\add_action('init', [$this, 'init']);
 	}
 
 	public function init()
 	{
+		\load_plugin_textdomain('ww-u2f', /** @scrutinizer ignore-type */ false, \plugin_basename(\dirname(__DIR__)) . '/lang/');
 		\add_action('login_init', [Login::class, 'instance']);
 
 		if (\is_admin()) {
