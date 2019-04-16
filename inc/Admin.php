@@ -42,7 +42,7 @@ final class Admin
 			list($req, $sigs) = U2FUtils::getRegisterDataFor($user_id);
 
 			$suffix = \wp_scripts_get_suffix();
-			\wp_enqueue_script('u2fcreate', WPUtils::assetsUrl("u2fcreate{$suffix}.js"), [], '2019041600', true);
+			\wp_enqueue_script('u2fcreate', WPUtils::assetsUrl("u2fcreate{$suffix}.js"), [], '2019041601', true);
 			\wp_localize_script('u2fcreate', 'wwU2F', [
 				'serverError' => \__('There was an error communicating with the server.', 'ww-u2f'),
 				'errors'      => [

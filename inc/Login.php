@@ -69,7 +69,7 @@ final class Login
 
 		$suffix = \wp_scripts_get_suffix();
 		\wp_enqueue_style('u2flogin', WPUtils::assetsUrl("u2flogin{$suffix}.css"), ['login'], '2019031900');
-		\wp_enqueue_script('u2flogin', WPUtils::assetsUrl("u2flogin{$suffix}.js"), [], '2019041600', true);
+		\wp_enqueue_script('u2flogin', WPUtils::assetsUrl("u2flogin{$suffix}.js"), [], '2019041601', true);
 		\wp_localize_script('u2flogin', 'wwU2F', [
 			'serverError' => \__('There was an error communicating with the server.', 'ww-u2f'),
 			'errors'      => [
