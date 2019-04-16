@@ -1,13 +1,6 @@
 /** global u2f, wwU2F, ajaxurl */
-function magic()
-{
-	var $          = document.getElementById.bind(document);
-	var form       = $('new-key-form');
-	var spinner    = form.querySelector('.spinner');
-	var list       = $('the-list');
-	var btn_submit = $('submit-button');
-	var key_name   = $('key-name');
-	var hint       = $('hint');
+(function() {
+	var $, form, spinner, list, btn_submit, key_name, hint;
 
 	function showError(msg, where)
 	{
@@ -102,14 +95,6 @@ function magic()
 		});
 	}
 
-	form.addEventListener('submit', function(e) {
-		e.preventDefault();
-		if (form.reportValidity()) {
-			showSpinner(true);
-			doRegister();
-		}
-	});
-
 	function killRow(target)
 	{
 		while (target !== null && target.tagName.toUpperCase() !== 'TR') {
@@ -148,51 +133,77 @@ function magic()
 		}
 	}
 
-	document.querySelector('table.widefat > tbody').addEventListener('click', function(e) {
-		var target = e.target;
-		while (target !== null && (!target.tagName || target.tagName.toUpperCase() !== 'BUTTON' || target.className.indexOf('revoke-button') === -1)) {
-			target = target.parentNode;
+	function magic()
+	{
+		$          = document.getElementById.bind(document);
+		form       = $('new-key-form');
+		spinner    = form.querySelector('.spinner');
+		list       = $('the-list');
+		btn_submit = $('submit-button');
+		key_name   = $('key-name');
+		hint       = $('hint');
+
+		form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			if (form.reportValidity()) {
+				showSpinner(true);
+				doRegister();
+			}
+		});
+
+		document.querySelector('table.widefat > tbody').addEventListener('click', function(e) {
+			var target = e.target;
+			while (target !== null && (!target.tagName || target.tagName.toUpperCase() !== 'BUTTON' || target.className.indexOf('revoke-button') === -1)) {
+				target = target.parentNode;
+			}
+
+			if (target && confirm(wwU2F.revconfirm)) {
+				var handle = target.dataset.handle;
+				var nonce  = target.dataset.nonce;
+				var req    = new XMLHttpRequest();
+				req.tgt    = target;
+				req.addEventListener('load', revokeCompleted);
+
+				var spinner = target.querySelector('.spinner');
+				spinner.style.float = 'none';
+				spinner.style.margin = 0;
+				spinner.classList.add('is-active');
+				hideMessages();
+
+				req.open('POST', ajaxurl);
+				req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				req.responseType = 'json';
+				req.send(
+					  'action=wwu2f_revoke'
+					+ '&handle=' + encodeURIComponent(handle) 
+					+ '&_wpnonce=' + nonce
+				);
+			}
+		});
+
+		if (typeof u2f === 'undefined' || !u2f.register) {
+			showError(wwU2F.noSupport, 'new-key');
 		}
-
-		if (target && confirm(wwU2F.revconfirm)) {
-			var handle = target.dataset.handle;
-			var nonce  = target.dataset.nonce;
-			var req    = new XMLHttpRequest();
-			req.tgt    = target;
-			req.addEventListener('load', revokeCompleted);
-
-			var spinner = target.querySelector('.spinner');
-			spinner.style.float = 'none';
-			spinner.style.margin = 0;
-			spinner.classList.add('is-active');
-			hideMessages();
-
-			req.open('POST', ajaxurl);
-			req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			req.responseType = 'json';
-			req.send(
-				  'action=wwu2f_revoke'
-				+ '&handle=' + encodeURIComponent(handle) 
-				+ '&_wpnonce=' + nonce
-			);
-		}
-	});
-
-	if (typeof u2f === 'undefined' || !u2f.register) {
-		showError(wwU2F.noSupport, 'new-key');
 	}
-}
 
-document.addEventListener('DOMContentLoaded', function() {
-	if (typeof u2f === 'undefined' || !u2f.register) {
-		var s = document.createElement('script');
-		s.setAttribute('src', wwU2F.u2f_api);
-		s.setAttribute('async', '');
-		s.addEventListener('load', magic);
-		s.addEventListener('error', magic);
-		document.head.appendChild(s);
+	function callback() {
+		if (typeof u2f === 'undefined' || !u2f.register) {
+			var s = document.createElement('script');
+			s.setAttribute('src', wwU2F.u2f_api);
+			s.setAttribute('async', '');
+			s.addEventListener('load', magic);
+			s.addEventListener('error', magic);
+			document.head.appendChild(s);
+		}
+		else {
+			magic();
+		}
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', callback);
 	}
 	else {
-		magic();
+		callback();
 	}
-});
+}());
