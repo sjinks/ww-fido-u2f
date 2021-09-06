@@ -3,7 +3,7 @@
  * Plugin Name: WW FIDO U2F Authentication
  * Plugin URI:
  * Description: Provides support for the Universal Second Factor (FIDO U2F) authentication
- * Version: 1.0.0
+ * Version: 1.0.3
  * Author: Volodymyr Kolesnykov
  * License: MIT
  * Text Domain: ww-u2f

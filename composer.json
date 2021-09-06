@@ -11,8 +11,8 @@
 	],
 	"description" : "WordPress Plugin to Enable FIDO U2F Authentication",
 	"require" : {
-		"yubico/u2flib-server" : "~1.0",
-		"composer/installers" : "~1",
+		"yubico/u2flib-server" : "^1.0",
+		"composer/installers" : "^1 || ^2",
 		"wildwolf/wp-class-autoloader" : "^5.5.0",
 		"php" : "> 7.0.0"
 	},
