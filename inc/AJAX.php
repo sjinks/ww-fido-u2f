@@ -92,6 +92,8 @@ final class AJAX
 			U2FUtils::authenticate($user_id, $response);
 
 			\wp_set_auth_cookie($user_id, (bool)$rememberme);
+			$user = \get_userdata($user_id);
+			do_action( 'wp_login', $user->user_login, $user );
 			if ($interim_login) {
 				\wp_die(\json_encode(['ok' => true, 'message' => \__('You have logged in successfully.', 'ww-u2f')]));
 			}
